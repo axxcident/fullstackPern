@@ -63,7 +63,7 @@ app.post("/persons/submit-form", async(req, res) => {
       `INSERT INTO persons(FirstName, LastName, Address, City) VALUES($1, $2, $3, $4)`,
       [FirstName, LastName, Address, City]
     )
-    res.sendStatus(200).json("Uppladdat!")
+    res.sendStatus(201)
   }
   catch(err) {
     res.sendStatus(400)
