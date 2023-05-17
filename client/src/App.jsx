@@ -49,7 +49,7 @@ function App() {
 
   return (
     <>
-      <h1>Formular dar du kan registrera Humans</h1>
+      <h1>Formulär där du kan registrera Humans</h1>
       <div>
         <form onSubmit={handleSubmit}>
           <label>
