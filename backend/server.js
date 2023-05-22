@@ -26,13 +26,22 @@ app.use((request, response, next) => {
 
 // databas
 const client = new Client({
-  database: process.env.DATABASE,
-  host: process.env.HOST,
-  password: process.env.PASSWORD,
+  database: process.env.PGDATABASE,
+  host: process.env.PGHOST,
+  password: process.env.PGPASSWORD,
   port: process.env.PORT,
-  user: process.env.USER
+  user: process.env.PGUSER
 })
 client.connect(function(err) {
+  client.query(
+    `CREATE TABLE IF NOT EXISTS persons (
+      id SERIAL PRIMARY KEY,
+      firstname VARCHAR(255),
+      lastname VARCHAR(255),
+      address VARCHAR(255),
+      city VARCHAR(255)
+    )`
+  );
   if(err) {
     console.log(err)
     throw err
@@ -57,7 +66,6 @@ app.get("/persons", async (req, res) => {
 
 app.post("/persons/submit-form", async(req, res) => {
   const {FirstName, LastName, Address, City} = req.body;
-
   try {
     await client.query(
       `INSERT INTO persons(FirstName, LastName, Address, City) VALUES($1, $2, $3, $4)`,
