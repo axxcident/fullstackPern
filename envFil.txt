@@ -1,5 +1,0 @@
-DATABASE=postgres
-HOST=localhost
-PASSWORD=som
-PORT=5432
-USER=postgres
